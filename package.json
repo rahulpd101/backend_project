@@ -9,14 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "eslint-plugin-react-hooks": "^4.4.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.9",
     "next": "12.1.4",
     "react": "18.0.0",
     "react-dom": "18.0.0",
+    "react-router-dom": "^6.3.0",
     "swr": "^1.2.2"
   },
   "devDependencies": {
+    "@swc/cli": "^0.1.57",
+    "@swc/core": "^1.2.162",
     "eslint": "8.12.0",
     "eslint-config-next": "12.1.4"
   }
