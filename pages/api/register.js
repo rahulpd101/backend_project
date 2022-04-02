@@ -1,4 +1,7 @@
+import dbConnect from "./dbConnect";
+
 export default async function (req, res) {
+	await dbConnect();
 	console.log(req.body);
 	try {
 		await User.create({

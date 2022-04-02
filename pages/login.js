@@ -1,26 +1,22 @@
 import React, { useState } from "react";
-import useSWR from "swr";
 import Router from "next/router";
 
 export default function Login() {
-	const fetcher = (url, options) => fetch(url, options).then((res) => res.json());
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
 	async function login(e) {
 		e.preventDefault();
 
-		const { data, error } = useSWR(
-			("http://localhost:3000/api/login",
-			{
-				method: "POST",
-				headers: { "Content-type": "application/json" },
-				body: JSON.stringify({ email, password }),
-			}),
-			fetcher
-		);
+		const response = await fetch("http://localhost:3000/api/login", {
+			method: "POST",
+			headers: {
+				"Content-type": "application/json",
+			},
+			body: JSON.stringify({ email, password }),
+		});
 
-		if (error) return <div>failed to load INFO</div>;
+		const data = await response.json();
 
 		if (data.user) {
 			localStorage.getItem("token", data.user);

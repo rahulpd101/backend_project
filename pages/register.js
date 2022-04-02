@@ -1,11 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import { useRouter } from "next/router";
-import useSWR from "swr";
-
+import Router from "next/router";
 export default function Register() {
-	const fetcher = (url, options) => fetch(url, options).then((res) => res.json());
-	const router = useRouter();
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -13,24 +9,22 @@ export default function Register() {
 	async function registerUser(e) {
 		e.preventDefault();
 
-		const { info, error } = useSWR(
-			("http://localhost:3000/api/register",
-			{
-				method: "POST",
-				headers: { "Content-type": "application/json" },
-				body: JSON.stringify({
-					name,
-					email,
-					password,
-				}),
+		const response = await fetch("http://localhost:3000/api/register", {
+			method: "POST",
+			headers: {
+				"Content-type": "application/json",
+			},
+			body: JSON.stringify({
+				name,
+				email,
+				password,
 			}),
-			fetcher
-		);
+		});
 
-		if (error) return <div>DATA didn't load!</div>;
+		const data = await response.json();
 
-		if (info.status === "ok") {
-			router.replace("/login");
+		if (data.status === "ok") {
+			Router.push("/login");
 		}
 	}
 
