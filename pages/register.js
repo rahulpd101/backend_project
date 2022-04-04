@@ -9,7 +9,7 @@ export default function Register() {
 	async function registerUser(e) {
 		e.preventDefault();
 
-		const response = await fetch("http://localhost:3000/api/register", {
+		const response = await fetch("/api/register", {
 			method: "POST",
 			headers: {
 				"Content-type": "application/json",
@@ -24,6 +24,7 @@ export default function Register() {
 		const data = await response.json();
 
 		if (data.status === "ok") {
+			console.log(data.status);
 			Router.push("/login");
 		}
 	}

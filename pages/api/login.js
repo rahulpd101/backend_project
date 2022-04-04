@@ -1,9 +1,7 @@
-import jwt from "jsonwebtoken";
-
 import User from "../../src/models/User";
-
+import jwt from "jsonwebtoken";
 export default async function handler(req, res) {
-	const user = await User.findOne({
+	const user = await User.find({
 		email: req.body.email,
 		password: req.body.password,
 	});
